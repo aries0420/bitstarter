@@ -1,16 +1,10 @@
 var express = require('express');
-
 var app = express.createServer(express.logger());
-
-// app.get('/', function(request, response) {
-//   response.send('Hello World 2!');
-// });
-
 var fs = require('fs');
+var buf = new Buffer (fs.readFileSync("index.html", "utf-8"));
 
-fs.readFile('~/startupeng/bitstarter/index.html', function (err) {
-  if (err) throw err;
-  console.log(buf.toString("Hello World from index.html", 0, "utf-8"));
+app.get('/', function(request, response) {
+    response.send(buf.toString());
 });
 
 var port = process.env.PORT || 5000;
